@@ -3,18 +3,7 @@ import PlaygroundLayout from "@/components/PlaygroundLayout";
 import { useEffect, useState } from "react";
 import { formatCode } from "@/lib/formatter";
 import { useDebounce } from "@/hooks/useDebounce";
-
-const defaultHTML = `<h1>Hello, World!</h1>
-<p>Start coding...</p>`;
-
-const defaultCSS = `body {
-  font-family: system-ui, -apple-system, sans-serif;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-}`;
-
-const defaultJS = `console.log('Hello from JavaScript!');`;
+import { defaultHTML, defaultCSS, defaultJS } from "@/lib/utils";
 
 export interface ConsoleLog {
   type: "log" | "error" | "warn" | "info";
