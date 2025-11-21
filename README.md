@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# Web Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern code playground for HTML, CSS, and JavaScript. Built to understand how iframes work in real applications.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Live preview with real-time updates
+- Syntax highlighting with CodeMirror 6
+- Dark mode with system preference detection
+- Code formatting with Prettier
+- Console output capture
+- Responsive design
+- Collapsible editors
 
-## React Compiler
+## Why I Built This
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+I wanted to understand how code playgrounds like CodePen work, specifically:
+- Iframe sandboxing and security
+- postMessage API for cross-frame communication
+- Console output capture from iframes
+- Building performant live preview systems
 
-## Expanding the ESLint configuration
+## Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Iframe Sandboxing**: Preview runs in a sandboxed iframe using `srcdoc` for HTML injection. Provides security, isolation, and real execution.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Cross-Frame Communication**: Console methods are intercepted in the iframe and sent to the parent via `postMessage`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Performance**: Debounced updates (300ms), memoized components, smart auto-scroll.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**State Management**: React Context for theme, local state for code/logs, proper cleanup.
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:3000](http://localhost:3000)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS
+- CodeMirror 6
+- Prettier
+- Radix UI
+
+## Project Structure
+
 ```
+src/
+├── components/     # React components
+├── contexts/       # Theme context
+├── hooks/          # useDebounce hook
+└── lib/            # Formatter utilities
+```
+
+## Key Technical Decisions
+
+1. **Security**: Iframe sandboxing prevents XSS, proper message validation
+2. **Performance**: Debouncing, memoization, optimized re-renders
+3. **Type Safety**: Full TypeScript coverage
+4. **Architecture**: Clean separation, reusable components
+5. **Error Handling**: Graceful error handling throughout
+
+## License
+
+MIT
