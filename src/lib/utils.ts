@@ -6,123 +6,104 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const defaultHTML = `
- <div class="container">
-  <h1 class="animated-title">
-    <span class="letter">W</span>
-    <span class="letter">E</span>
-    <span class="letter">B</span>
-    <span class="letter space"></span>
-    <span class="letter">P</span>
-    <span class="letter">L</span>
-    <span class="letter">A</span>
-    <span class="letter">Y</span>
-    <span class="letter">G</span>
-    <span class="letter">R</span>
-    <span class="letter">O</span>
-    <span class="letter">U</span>
-    <span class="letter">N</span>
-    <span class="letter">D</span>
-  </h1>
+<div class="container">
+  <h1>Hello, World!</h1>
+  <p>Welcome to the playground. Start coding!</p>
+  <button id="clickBtn">Click Me</button>
+  <div id="output"></div>
 </div>
 `;
 
 export const defaultCSS = `
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Arial Black', 'Arial Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  padding: 20px;
 }
 
 .container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   text-align: center;
+  max-width: 500px;
+  width: 100%;
 }
 
-.animated-title {
-  font-family: 'Impact', 'Arial Black', 'Franklin Gothic Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: #00ffff;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.1em;
-  text-shadow: 
-    0 0 10px #00ffff,
-    0 0 20px #00ffff,
-    0 0 30px #00ffff,
-    0 0 40px #00ffff;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
 
-.letter {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(50px) rotateX(90deg);
-  animation: letterAnimation 0.6s ease forwards;
+p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
 }
 
-.letter.space {
-  width: 0.3em;
+button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.letter:nth-child(1) { animation-delay: 0.1s; }
-.letter:nth-child(2) { animation-delay: 0.2s; }
-.letter:nth-child(3) { animation-delay: 0.3s; }
-.letter:nth-child(4) { animation-delay: 0.4s; }
-.letter:nth-child(5) { animation-delay: 0.5s; }
-.letter:nth-child(6) { animation-delay: 0.6s; }
-.letter:nth-child(7) { animation-delay: 0.7s; }
-.letter:nth-child(8) { animation-delay: 0.8s; }
-.letter:nth-child(9) { animation-delay: 0.9s; }
-.letter:nth-child(10) { animation-delay: 1.0s; }
-.letter:nth-child(11) { animation-delay: 1.1s; }
-.letter:nth-child(12) { animation-delay: 1.2s; }
-.letter:nth-child(13) { animation-delay: 1.3s; }
-.letter:nth-child(14) { animation-delay: 1.4s; }
-.letter:nth-child(15) { animation-delay: 1.5s; }
-
-@keyframes letterAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(50px) rotateX(90deg);
-  }
-  50% {
-    transform: translateY(-10px) rotateX(0deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotateX(0deg);
-  }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
-.letter {
-  transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+button:active {
+  transform: translateY(0);
 }
 
-.letter:hover {
-  transform: translateY(-10px) scale(1.2);
-  color: #ff00ff;
-  text-shadow: 
-    0 0 10px #ff00ff,
-    0 0 20px #ff00ff,
-    0 0 30px #ff00ff,
-    0 0 40px #ff00ff;
+#output {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  min-height: 50px;
+  color: #333;
+  font-weight: 500;
 }
 `;
 
 export const defaultJS = `
-console.log('Hello, World!');
+const button = document.getElementById('clickBtn');
+const output = document.getElementById('output');
+let clickCount = 0;
+
+button.addEventListener('click', () => {
+  clickCount++;
+  output.textContent = \`Button clicked \${clickCount} time\${clickCount !== 1 ? 's' : ''}!\`;
+  
+  // Add a fun animation
+  output.style.transform = 'scale(1.1)';
+  setTimeout(() => {
+    output.style.transform = 'scale(1)';
+  }, 200);
+  
+  console.log(\`Click count: \${clickCount}\`);
+});
+
+// Add transition for smooth animation
+output.style.transition = 'transform 0.2s ease';
+
+console.log('Playground loaded successfully!');
 `;

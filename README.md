@@ -2,6 +2,8 @@
 
 A modern code playground for HTML, CSS, and JavaScript. Built to understand how iframes work in real applications.
 
+![alt text](public/full-playground.png)
+
 ## Features
 
 - Live preview with real-time updates
@@ -15,6 +17,7 @@ A modern code playground for HTML, CSS, and JavaScript. Built to understand how 
 ## Why I Built This
 
 I wanted to understand how code playgrounds like CodePen work, specifically:
+
 - Iframe sandboxing and security
 - postMessage API for cross-frame communication
 - Console output capture from iframes
